@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:13
+    container_name: meu-enem-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: meu_enem_user
+      POSTGRES_PASSWORD: meu_enem_password
+      POSTGRES_DB: meu_enem_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data: {}
