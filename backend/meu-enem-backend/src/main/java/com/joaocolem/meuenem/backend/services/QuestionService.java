@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.joaocolem.meuenem.backend.domain.Question;
 import com.joaocolem.meuenem.backend.dto.QuestionResponseDTO;
+import com.joaocolem.meuenem.backend.exceptions.QuestionNotFoundException;
 import com.joaocolem.meuenem.backend.repositories.QuestionRepository;
 
 @Service
@@ -18,7 +19,7 @@ public class QuestionService {
     @Transactional(readOnly = true)
     public QuestionResponseDTO getQuestionById(Long id) {
         Question question = questionRepository.findByIdWithAllData(id)
-                .orElseThrow(() -> new RuntimeException("Questão não encontrada"));
+                .orElseThrow(() -> new QuestionNotFoundException());
 
         return new QuestionResponseDTO(
                 question.getId(),
